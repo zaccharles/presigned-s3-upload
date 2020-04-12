@@ -1,0 +1,12 @@
+{
+  "name": "presigned-s3-upload",
+  "version": "1.0.0",
+  "description": "Examples of uploading to S3 using presigned URLs and presigned POST.",
+  "repository": "https://github.com/zaccharles/presigned-s3-upload",
+  "license": "MIT",
+  "dependencies": {
+    "file-type": "^14.1.4",
+    "serverless": "^1.67.3",
+    "uuid": "^7.0.3"
+  }
+}

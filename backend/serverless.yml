@@ -1,0 +1,48 @@
+service: presigned-s3-upload
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource:
+        Fn::GetAtt: 
+          - SignedUploadBucket
+          - Arn
+  environment:
+    BUCKET_NAME:
+      Ref: SignedUploadBucket
+
+functions:
+  sign-url:
+    handler: url-signer.sign
+    events:
+      - http:
+          path: /signed-url
+          method: get
+          cors: true
+
+  sign-post:
+    handler: post-signer.sign
+    events:
+      - http:
+          path: /signed-post
+          method: get
+          cors: true
+
+resources:
+  Resources:
+    SignedUploadBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        CorsConfiguration:
+          CorsRules:
+            - AllowedMethods:
+                - PUT
+                - POST
+              AllowedOrigins:
+                - '*'
+              AllowedHeaders:
+                - '*'
