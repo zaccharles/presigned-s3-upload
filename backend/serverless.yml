@@ -8,9 +8,11 @@ provider:
       Action:
         - s3:*
       Resource:
-        Fn::GetAtt: 
-          - SignedUploadBucket
-          - Arn
+        - Fn::Join:
+            - ""
+            - - "arn:aws:s3:::"
+              - Ref: "SignedUploadBucket"
+              - "/*"
   environment:
     BUCKET_NAME:
       Ref: SignedUploadBucket
