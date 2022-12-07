@@ -8,6 +8,6 @@
     "uuid": "^7.0.3"
   },
   "devDependencies": {
-    "serverless": "^1.67.3"
+    "serverless": "^3.25.1"
   }
 }
